@@ -178,5 +178,7 @@ Current docs to show progress:
 - `docs/16_closed_loop_mission_demo.md`
 - `docs/17_solidworks_and_interview_demo_plan.md`
 - `docs/18_iterative_critique_checklist.md`
+- `docs/19_teaching_todos_and_checkpoints.md`
+- `docs/20_senior_engineer_teaching_guide.md`
 
 M1 SolidWorks automation now has a macro and dry-run mass budget. The final `.SLDPRT` still requires running the macro inside SolidWorks on Windows.
