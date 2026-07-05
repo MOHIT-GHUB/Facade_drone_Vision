@@ -7,6 +7,9 @@
 - ROS Humble + `ros_gz` bridge installed.
 - Gazebo facade world validates.
 - ROS package builds.
+- SolidWorks macro for the quadcopter water-jet/blower payload exists.
+- Mechanical mass/CG/thrust dry-run passes.
+- Interview Gazebo world and ROS launch exist.
 - Synthetic facade perception works.
 - Cleaning-zone map now separates glass, concrete, frame, unknown, and obstacles.
 - Path planner now cleans dirty glass only and skips non-cleanable areas.
@@ -35,6 +38,7 @@
 - Replace OpenCV heuristic with learned segmentation output.
 - Add real building photo ingestion workflow.
 - Improve PPO with CNN/map observation and curriculum learning.
+- Run the SolidWorks macro in SolidWorks and export `.SLDPRT`/STEP screenshots.
 - Connect the Python closed-loop command log to live ROS/PX4 waypoint or
   velocity commands.
 - Run Gazebo/PX4 closed-loop demo: perception -> planner -> safety -> offboard

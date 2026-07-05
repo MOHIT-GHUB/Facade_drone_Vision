@@ -42,7 +42,19 @@ Before PPO, run the deterministic baseline:
 python scripts\evaluate_lawnmower.py
 ```
 
-## Step 5 - Run OpenCV perception on a frame or video
+## Step 5 - Validate the SolidWorks payload design
+
+```bash
+PYTHONPATH=src python3 scripts/generate_solidworks_quadcopter.py --dry-run
+```
+
+Then open this macro in SolidWorks and run `main`:
+
+```text
+cad/solidworks/facade_cleaning_quadcopter_generator.vba
+```
+
+## Step 6 - Run OpenCV perception on a frame or video
 
 After OpenCV is installed:
 
@@ -56,7 +68,7 @@ Or run the full synthetic facade perception demo:
 python3 scripts/run_perception_demo.py
 ```
 
-## Step 6 - ROS 2/Gazebo route
+## Step 7 - ROS 2/Gazebo route
 
 From Ubuntu/WSL when available:
 
@@ -77,7 +89,19 @@ To launch the Gazebo facade world through `ros_gz_sim`:
 ros2 launch facade_cleaning_uav sim.launch.py
 ```
 
-## Step 7 - Update evidence
+To launch the interview demo world:
+
+```bash
+ros2 launch facade_cleaning_uav interview_demo.launch.py
+```
+
+Standalone Gazebo:
+
+```bash
+gz sim -r simulation/gazebo/interview_facade_cleaning_world.sdf
+```
+
+## Step 8 - Update evidence
 
 After each successful run, update:
 

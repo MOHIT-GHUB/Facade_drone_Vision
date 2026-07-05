@@ -29,7 +29,8 @@ The project foundation is working. The reliable demo path today is:
 4. Obstacle-aware route planning with clearance detours.
 5. Closed-loop safety-gated command generation and cleaning actuation logs.
 6. Safety override checks.
-7. ROS/Gazebo package build and world validation.
+7. SolidWorks payload macro and mass-budget dry-run.
+8. Interview Gazebo world and ROS launch validation.
 
 The learned perception stack is partially working:
 
@@ -166,3 +167,26 @@ Use these files:
 This is the strongest current proof that the project is no longer only separate
 modules. The remaining integration jump is to drive PX4 SITL with the same
 commands inside Gazebo.
+
+### SolidWorks And Interview World
+
+Status: interview-demo assets added and validation-passed.
+
+Latest mechanical check:
+
+- Wet mass: `4.202 kg`
+- Reservoir: `1.2 L`
+- Thrust-to-weight: `1.747`
+- CG Y offset: `0.001 m`
+- Status: pass
+
+Use these files:
+
+- `cad/solidworks/facade_cleaning_quadcopter_generator.vba`
+- `outputs/cad/quadcopter_payload_spec.json`
+- `simulation/gazebo/interview_facade_cleaning_world.sdf`
+- `outputs/interview_demo/interview_demo_storyboard.md`
+
+The important critique note: the first motor assumption failed the lift-margin
+check. The current configuration only passed after increasing the motor thrust
+assumption to a heavier-lift class.

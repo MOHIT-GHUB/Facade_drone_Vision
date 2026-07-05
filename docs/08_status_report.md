@@ -23,6 +23,9 @@ Generated on 2026-07-05 IST.
 - Closed-loop mission demo runs planner steps through safety, velocity command
   generation, and cleaning actuation logs.
 - Injected gust fault triggers a safety override in the closed-loop demo.
+- SolidWorks macro for the quadcopter water-jet/blower payload has been added.
+- Mechanical dry-run mass/CG/thrust validation passes.
+- Interview Gazebo world and ROS launch have been added and validate/build.
 
 ## Verification results
 
@@ -52,6 +55,11 @@ Latest checked outputs:
   - Nominal run: `20` events, `2` safe cleaning events, `0` safety overrides.
   - Fault run: injected gust triggered `1` safety override.
   - Clearance violations: `0`.
+- Mechanical dry-run:
+  - Wet mass: `4.202 kg`
+  - Thrust-to-weight: `1.747`
+  - CG Y offset: `0.001 m`
+- Interview world: standalone and ROS package SDF files validate.
 
 ## Honest PPO gate
 
@@ -74,10 +82,12 @@ Use this for a truthful demo:
 2. Show safety fault overrides.
 3. Show Gazebo facade world validation and ROS package build.
 4. Show lawnmower vs greedy comparison.
-5. Show `outputs/closed_loop_mission/summary.json` to prove the planner is now
+5. Show the SolidWorks macro and `outputs/cad/quadcopter_payload_spec.json`.
+6. Launch `interview_facade_cleaning_world.sdf` or show screenshots from it.
+7. Show `outputs/closed_loop_mission/summary.json` to prove the planner is now
    connected to safety, offboard-command shaping, and actuation logging.
-6. Explain that PPO training runs but has not passed its baseline gate yet.
-7. Explain that SegFormer/YOLO learned perception is wired, with SegFormer staged and YOLO still requiring serious training.
+8. Explain that PPO training runs but has not passed its baseline gate yet.
+9. Explain that SegFormer/YOLO learned perception is wired, with SegFormer staged and YOLO still requiring serious training.
 
 ## Next technical move
 

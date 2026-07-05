@@ -22,6 +22,7 @@ This repository follows the master prompt in `docs/00_master_prompt_trace.md`.
 - `src/facade_uav/`: Python core for map representation, safety, perception, RL, and control interfaces.
 - `ros2_ws/src/facade_cleaning_uav/`: ROS 2 package scaffold for later Humble/Gazebo/PX4 integration.
 - `simulation/gazebo/`: Gazebo world scaffold.
+- `cad/solidworks/`: SolidWorks macro and shared payload parameters for the quadcopter cleaning payload.
 - `scripts/`: environment checks and smoke tests.
 - `requirements.txt`: Python dependencies for the OpenCV/RL workstreams.
 
@@ -43,6 +44,32 @@ Run the full WSL verification:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\run_all_verification.ps1
+```
+
+Run the SolidWorks/CAD dry-run:
+
+```bash
+PYTHONPATH=src python3 scripts/generate_solidworks_quadcopter.py --dry-run
+```
+
+This validates the water-jet/blower payload mass budget and writes:
+
+- `outputs/cad/quadcopter_payload_spec.json`
+
+Open the SolidWorks macro from:
+
+- `cad/solidworks/facade_cleaning_quadcopter_generator.vba`
+
+Run the interview simulation world:
+
+```bash
+gz sim -r simulation/gazebo/interview_facade_cleaning_world.sdf
+```
+
+Or through ROS 2:
+
+```bash
+ros2 launch facade_cleaning_uav interview_demo.launch.py
 ```
 
 Analyze a facade/building image:
@@ -149,5 +176,7 @@ Current docs to show progress:
 - `docs/12_progress_evaluation.md`
 - `docs/14_object_avoidance_route_handling.md`
 - `docs/16_closed_loop_mission_demo.md`
+- `docs/17_solidworks_and_interview_demo_plan.md`
+- `docs/18_iterative_critique_checklist.md`
 
-M1 SolidWorks automation remains documented but is not executable in this sandbox because SolidWorks COM automation needs a Windows desktop SolidWorks install.
+M1 SolidWorks automation now has a macro and dry-run mass budget. The final `.SLDPRT` still requires running the macro inside SolidWorks on Windows.

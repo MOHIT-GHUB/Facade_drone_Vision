@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="interview_facade_cleaning_world">
+    <gravity>0 0 -9.81</gravity>
+    <scene>
+      <ambient>0.62 0.64 0.66 1</ambient>
+      <background>0.72 0.82 0.92 1</background>
+    </scene>
+
+    <wind>
+      <linear_velocity>2.0 0.2 0</linear_velocity>
+    </wind>
+
+    <model name="ground_and_start_pad">
+      <static>true</static>
+      <pose>0 0 -0.03 0 0 0</pose>
+      <link name="ground">
+        <visual name="concrete_floor">
+          <geometry><box><size>18 8 0.04</size></box></geometry>
+          <material>
+            <ambient>0.38 0.38 0.36 1</ambient>
+            <diffuse>0.45 0.45 0.42 1</diffuse>
+          </material>
+        </visual>
+        <visual name="start_pad">
+          <pose>-5 -2.2 0.025 0 0 0</pose>
+          <geometry><cylinder><radius>0.75</radius><length>0.025</length></cylinder></geometry>
+          <material>
+            <ambient>0.05 0.16 0.12 1</ambient>
+            <diffuse>0.05 0.45 0.32 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="water_refill_station">
+      <static>true</static>
+      <pose>-6.4 -2.35 0.65 0 0 0</pose>
+      <link name="station">
+        <visual name="base_cart">
+          <pose>0 0 -0.42 0 0 0</pose>
+          <geometry><box><size>0.9 0.5 0.12</size></box></geometry>
+          <material><ambient>0.08 0.08 0.09 1</ambient><diffuse>0.12 0.12 0.13 1</diffuse></material>
+        </visual>
+        <visual name="water_tank">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry><cylinder><radius>0.26</radius><length>0.95</length></cylinder></geometry>
+          <material><ambient>0.05 0.32 0.65 1</ambient><diffuse>0.08 0.48 0.92 1</diffuse></material>
+        </visual>
+        <visual name="quick_connect_nozzle">
+          <pose>0.48 0 0.1 0 1.5708 0</pose>
+          <geometry><cylinder><radius>0.055</radius><length>0.28</length></cylinder></geometry>
+          <material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="water_supply_hose">
+      <static>true</static>
+      <pose>-5.85 -2.3 0.17 0 1.5708 0</pose>
+      <link name="hose">
+        <visual name="blue_hose_to_start_pad">
+          <geometry><cylinder><radius>0.025</radius><length>1.2</length></cylinder></geometry>
+          <material><ambient>0.02 0.18 0.75 1</ambient><diffuse>0.02 0.25 0.95 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="washable_glass_facade">
+      <static>true</static>
+      <pose>0 0 5 0 0 0</pose>
+      <link name="facade">
+        <collision name="wall_collision">
+          <geometry><box><size>14 0.2 10</size></box></geometry>
+        </collision>
+        <visual name="glass_curtain_wall">
+          <geometry><box><size>14 0.2 10</size></box></geometry>
+          <material>
+            <ambient>0.22 0.42 0.52 1</ambient>
+            <diffuse>0.34 0.72 0.86 1</diffuse>
+            <specular>0.85 0.85 0.85 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="window_frame_grid">
+      <static>true</static>
+      <pose>0 -0.14 5 0 0 0</pose>
+      <link name="frames">
+        <visual name="vertical_frame_left"><pose>-4.6 0 0 0 0 0</pose><geometry><box><size>0.08 0.08 10.1</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="vertical_frame_mid_left"><pose>-2.3 0 0 0 0 0</pose><geometry><box><size>0.08 0.08 10.1</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="vertical_frame_center"><pose>0 0 0 0 0 0</pose><geometry><box><size>0.08 0.08 10.1</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="vertical_frame_mid_right"><pose>2.3 0 0 0 0 0</pose><geometry><box><size>0.08 0.08 10.1</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="vertical_frame_right"><pose>4.6 0 0 0 0 0</pose><geometry><box><size>0.08 0.08 10.1</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="horizontal_frame_low"><pose>0 0 -2.5 0 0 0</pose><geometry><box><size>14.1 0.08 0.08</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="horizontal_frame_mid"><pose>0 0 0 0 0 0</pose><geometry><box><size>14.1 0.08 0.08</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="horizontal_frame_high"><pose>0 0 2.5 0 0 0</pose><geometry><box><size>14.1 0.08 0.08</size></box></geometry><material><ambient>0.02 0.02 0.02 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="dirty_target_patches">
+      <static>true</static>
+      <pose>0 -0.18 5 0 0 0</pose>
+      <link name="dirt">
+        <visual name="washable_dirt_1"><pose>-3.4 0 1.4 0 0 0</pose><geometry><box><size>0.85 0.025 0.55</size></box></geometry><material><ambient>0.25 0.18 0.08 1</ambient><diffuse>0.36 0.25 0.08 1</diffuse></material></visual>
+        <visual name="washable_dirt_2"><pose>1.15 0 0.8 0 0 0</pose><geometry><box><size>0.75 0.025 0.5</size></box></geometry><material><ambient>0.25 0.18 0.08 1</ambient><diffuse>0.36 0.25 0.08 1</diffuse></material></visual>
+        <visual name="washable_dirt_3"><pose>3.35 0 -1.2 0 0 0</pose><geometry><box><size>0.9 0.025 0.65</size></box></geometry><material><ambient>0.25 0.18 0.08 1</ambient><diffuse>0.36 0.25 0.08 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="skip_zone_concrete_panels">
+      <static>true</static>
+      <pose>0 -0.19 5 0 0 0</pose>
+      <link name="skip">
+        <visual name="concrete_skip_left"><pose>-6.0 0 -0.7 0 0 0</pose><geometry><box><size>1.0 0.03 2.0</size></box></geometry><material><ambient>0.42 0.42 0.42 1</ambient><diffuse>0.55 0.55 0.55 1</diffuse></material></visual>
+        <visual name="concrete_skip_right"><pose>6.0 0 1.2 0 0 0</pose><geometry><box><size>1.0 0.03 2.5</size></box></geometry><material><ambient>0.42 0.42 0.42 1</ambient><diffuse>0.55 0.55 0.55 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacle_ac_units">
+      <static>true</static>
+      <pose>0 -0.38 5 0 0 0</pose>
+      <link name="obstacles">
+        <visual name="ac_unit_low"><pose>-1.15 0 -1.3 0 0 0</pose><geometry><box><size>0.75 0.46 0.48</size></box></geometry><material><ambient>0.12 0.12 0.13 1</ambient><diffuse>0.18 0.18 0.19 1</diffuse></material></visual>
+        <visual name="ac_unit_high"><pose>2.4 0 1.75 0 0 0</pose><geometry><box><size>0.85 0.48 0.52</size></box></geometry><material><ambient>0.12 0.12 0.13 1</ambient><diffuse>0.18 0.18 0.19 1</diffuse></material></visual>
+        <visual name="maintenance_ledge"><pose>0.4 0 -2.45 0 0 0</pose><geometry><box><size>2.0 0.42 0.16</size></box></geometry><material><ambient>0.05 0.05 0.05 1</ambient><diffuse>0.08 0.08 0.08 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="facade_cleaning_quadcopter_visual">
+      <static>true</static>
+      <pose>-5 -2.2 1.1 0 0 0</pose>
+      <link name="uav">
+        <visual name="central_body"><geometry><box><size>0.32 0.24 0.075</size></box></geometry><material><ambient>0.12 0.12 0.13 1</ambient><diffuse>0.18 0.18 0.2 1</diffuse></material></visual>
+        <visual name="front_right_arm"><pose>0.21 0.21 0 0 0 0.785398</pose><geometry><box><size>0.6 0.035 0.024</size></box></geometry><material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.06 0.06 0.06 1</diffuse></material></visual>
+        <visual name="front_left_arm"><pose>-0.21 0.21 0 0 0 -0.785398</pose><geometry><box><size>0.6 0.035 0.024</size></box></geometry><material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.06 0.06 0.06 1</diffuse></material></visual>
+        <visual name="rear_right_arm"><pose>0.21 -0.21 0 0 0 -0.785398</pose><geometry><box><size>0.6 0.035 0.024</size></box></geometry><material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.06 0.06 0.06 1</diffuse></material></visual>
+        <visual name="rear_left_arm"><pose>-0.21 -0.21 0 0 0 0.785398</pose><geometry><box><size>0.6 0.035 0.024</size></box></geometry><material><ambient>0.04 0.04 0.04 1</ambient><diffuse>0.06 0.06 0.06 1</diffuse></material></visual>
+        <visual name="water_reservoir"><pose>0 0.02 0.1 1.5708 0 0</pose><geometry><cylinder><radius>0.09</radius><length>0.22</length></cylinder></geometry><material><ambient>0.05 0.35 0.8 1</ambient><diffuse>0.08 0.48 0.95 1</diffuse></material></visual>
+        <visual name="front_pump"><pose>0 0.18 -0.02 0 0 0</pose><geometry><box><size>0.13 0.08 0.07</size></box></geometry><material><ambient>0.08 0.08 0.09 1</ambient><diffuse>0.12 0.12 0.13 1</diffuse></material></visual>
+        <visual name="water_jet_spray_bar"><pose>0 0.27 -0.015 0 0 0</pose><geometry><box><size>0.28 0.03 0.018</size></box></geometry><material><ambient>0.05 0.18 0.85 1</ambient><diffuse>0.06 0.28 0.95 1</diffuse></material></visual>
+        <visual name="left_blower_duct"><pose>-0.11 0.285 -0.01 1.5708 0 0</pose><geometry><cylinder><radius>0.04</radius><length>0.07</length></cylinder></geometry><material><ambient>0.06 0.06 0.06 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material></visual>
+        <visual name="right_blower_duct"><pose>0.11 0.285 -0.01 1.5708 0 0</pose><geometry><cylinder><radius>0.04</radius><length>0.07</length></cylinder></geometry><material><ambient>0.06 0.06 0.06 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material></visual>
+        <visual name="rgb_thermal_lidar_gimbal"><pose>0 0.11 -0.09 0 0 0</pose><geometry><box><size>0.1 0.065 0.075</size></box></geometry><material><ambient>0.01 0.01 0.01 1</ambient><diffuse>0.02 0.02 0.02 1</diffuse></material></visual>
+        <visual name="quick_connect_hose_socket"><pose>0 -0.2 0 0 0 0</pose><geometry><box><size>0.16 0.05 0.035</size></box></geometry><material><ambient>0.05 0.35 0.95 1</ambient><diffuse>0.05 0.4 1 1</diffuse></material></visual>
+        <visual name="spray_visual_cone"><pose>0 0.68 -0.015 1.5708 0 0</pose><geometry><cylinder><radius>0.16</radius><length>0.7</length></cylinder></geometry><material><ambient>0.15 0.55 1 0.25</ambient><diffuse>0.15 0.55 1 0.25</diffuse></material></visual>
+        <visual name="rotor_front_right"><pose>0.42 0.42 0.045 0 0 0</pose><geometry><cylinder><radius>0.127</radius><length>0.006</length></cylinder></geometry><material><ambient>0.7 0.82 0.95 0.45</ambient><diffuse>0.7 0.82 0.95 0.45</diffuse></material></visual>
+        <visual name="rotor_front_left"><pose>-0.42 0.42 0.045 0 0 0</pose><geometry><cylinder><radius>0.127</radius><length>0.006</length></cylinder></geometry><material><ambient>0.7 0.82 0.95 0.45</ambient><diffuse>0.7 0.82 0.95 0.45</diffuse></material></visual>
+        <visual name="rotor_rear_right"><pose>0.42 -0.42 0.045 0 0 0</pose><geometry><cylinder><radius>0.127</radius><length>0.006</length></cylinder></geometry><material><ambient>0.7 0.82 0.95 0.45</ambient><diffuse>0.7 0.82 0.95 0.45</diffuse></material></visual>
+        <visual name="rotor_rear_left"><pose>-0.42 -0.42 0.045 0 0 0</pose><geometry><cylinder><radius>0.127</radius><length>0.006</length></cylinder></geometry><material><ambient>0.7 0.82 0.95 0.45</ambient><diffuse>0.7 0.82 0.95 0.45</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="mission_route_markers">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="route">
+        <visual name="waypoint_start"><pose>-5 -2.2 1.15 0 0 0</pose><geometry><sphere><radius>0.09</radius></sphere></geometry><material><ambient>0.05 0.9 0.4 1</ambient><diffuse>0.05 0.9 0.4 1</diffuse></material></visual>
+        <visual name="waypoint_refill"><pose>-6.0 -2.35 1.0 0 0 0</pose><geometry><sphere><radius>0.08</radius></sphere></geometry><material><ambient>0.05 0.25 1 1</ambient><diffuse>0.05 0.25 1 1</diffuse></material></visual>
+        <visual name="waypoint_scan"><pose>-3 -1.3 2.8 0 0 0</pose><geometry><sphere><radius>0.08</radius></sphere></geometry><material><ambient>0.9 0.9 0.05 1</ambient><diffuse>0.9 0.9 0.05 1</diffuse></material></visual>
+        <visual name="waypoint_clean_1"><pose>-3.4 -1.25 6.4 0 0 0</pose><geometry><sphere><radius>0.08</radius></sphere></geometry><material><ambient>1 0.25 0.05 1</ambient><diffuse>1 0.25 0.05 1</diffuse></material></visual>
+        <visual name="waypoint_clean_2"><pose>1.15 -1.25 5.8 0 0 0</pose><geometry><sphere><radius>0.08</radius></sphere></geometry><material><ambient>1 0.25 0.05 1</ambient><diffuse>1 0.25 0.05 1</diffuse></material></visual>
+        <visual name="waypoint_clean_3"><pose>3.35 -1.25 3.8 0 0 0</pose><geometry><sphere><radius>0.08</radius></sphere></geometry><material><ambient>1 0.25 0.05 1</ambient><diffuse>1 0.25 0.05 1</diffuse></material></visual>
+      </link>
+    </model>
+  </world>
+</sdf>

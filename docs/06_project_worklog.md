@@ -145,3 +145,35 @@ Evidence:
 - `outputs/closed_loop_mission/summary.json`
 - `outputs/closed_loop_mission/nominal_execution.json`
 - `outputs/closed_loop_mission/fault_execution.json`
+
+## 2026-07-06 - SolidWorks and interview simulation demo pass
+
+What was implemented:
+
+- Added a SolidWorks VBA macro that generates the facade-cleaning quadcopter
+  concept with water reservoir, pump, water-jet spray bar, blower ducts, sensor
+  pod, hose dock, rotors, arms, and landing skids.
+- Added a shared mechanical parameter JSON.
+- Added a dry-run generator that validates mass, CG, reservoir size, and
+  thrust-to-weight before opening SolidWorks.
+- Added an interview Gazebo world with start pad, refill station, washable
+  facade, dirty patches, concrete skip zones, AC/ledge obstacles, route
+  markers, and a payload-equipped UAV visual model.
+- Added ROS `interview_demo.launch.py` and a status timeline node.
+- Added generated interview storyboard artifacts.
+
+Critique result:
+
+- The first mechanical dry-run failed because thrust-to-weight was only `1.116`.
+- The motor thrust assumption was refined to a heavier-lift class.
+- Latest dry-run passes with wet mass `4.202 kg`, thrust-to-weight `1.747`, and
+  CG Y offset `0.001 m`.
+
+Evidence:
+
+- `cad/solidworks/facade_cleaning_quadcopter_generator.vba`
+- `outputs/cad/quadcopter_payload_spec.json`
+- `simulation/gazebo/interview_facade_cleaning_world.sdf`
+- `outputs/interview_demo/interview_demo_storyboard.md`
+- `docs/17_solidworks_and_interview_demo_plan.md`
+- `docs/18_iterative_critique_checklist.md`

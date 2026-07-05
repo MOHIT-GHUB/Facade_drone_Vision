@@ -11,9 +11,11 @@ setup(
         (f"share/{package_name}", ["package.xml"]),
         (f"share/{package_name}/launch", ["launch/facade_cleaning_uav.launch.py"]),
         (f"share/{package_name}/launch", ["launch/sim.launch.py"]),
+        (f"share/{package_name}/launch", ["launch/interview_demo.launch.py"]),
         (f"share/{package_name}/config", ["config/safety.yaml"]),
         (f"share/{package_name}/config", ["config/bridge.yaml"]),
         (f"share/{package_name}/worlds", ["worlds/facade_world.sdf"]),
+        (f"share/{package_name}/worlds", ["worlds/interview_facade_cleaning_world.sdf"]),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -25,6 +27,7 @@ setup(
         "console_scripts": [
             "safety_node = facade_cleaning_uav.safety_node:main",
             "planner_node = facade_cleaning_uav.planner_node:main",
+            "interview_demo_node = facade_cleaning_uav.interview_demo_node:main",
         ],
     },
 )

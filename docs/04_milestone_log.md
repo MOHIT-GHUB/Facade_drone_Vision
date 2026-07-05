@@ -29,14 +29,17 @@ Evidence:
 
 ## M1 - Mechanical/SolidWorks automation
 
-Status: planned, blocked by local SolidWorks availability.
+Status: macro and dry-run mass budget completed; final CAD export requires SolidWorks.
 
 Notes:
 
-- Needs SolidWorks on Windows.
-- Recommended route is Python plus `pywin32` COM once mass/CG model is final.
-- v1 software is structured so reservoir mass depletion is already represented
-  in planning and actuation logs before CAD automation is added.
+- `cad/solidworks/facade_cleaning_quadcopter_generator.vba` generates the
+  water-jet/blower quadcopter concept.
+- `scripts/generate_solidworks_quadcopter.py --dry-run` validates mass, CG, and
+  thrust-to-weight without SolidWorks.
+- Latest dry-run: wet mass `4.202 kg`, thrust-to-weight `1.747`, CG Y offset
+  `0.001 m`.
+- Final `.SLDPRT` still needs SolidWorks on Windows.
 
 ## M2 - Simulation
 
@@ -45,6 +48,9 @@ Status: scaffolded and validation-passed.
 Completed:
 
 - Gazebo facade SDF validates.
+- Interview Gazebo world validates and includes start pad, water refill station,
+  dirty glass targets, concrete skip panels, AC obstacles, route markers, and a
+  payload-equipped UAV visual model.
 - ROS 2 package builds under Humble.
 - Conservative Humble/Fortress compatibility route is documented.
 
