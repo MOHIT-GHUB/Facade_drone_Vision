@@ -1,0 +1,13 @@
+numpy>=2.0
+opencv-python>=4.10
+gymnasium>=0.29
+stable-baselines3>=2.3
+torch>=2.3
+ultralytics>=8.3
+transformers>=4.44
+Pillow>=10.4
+matplotlib>=3.9
+accelerate>=1.14
+safetensors>=0.8
+torchvision>=0.27
+scipy>=1.15

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv_wsl/
+outputs/
+runs/
+data/raw/
+data/processed/
+models/
+yolo11n.pt
+*.log
+*.zip
+*.bag
+*.db3
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/

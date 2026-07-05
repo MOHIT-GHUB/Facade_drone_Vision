@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/mnt/c/Users/mohit/OneDrive/Documents/Facade_drone_Vision"
+cd "$ROOT"
+
+echo "[1/7] Core smoke test"
+python3 scripts/smoke_test_core.py
+
+echo "[2/7] Python stack"
+PYTHONPATH=src python3 scripts/check_python_stack.py
+
+echo "[3/7] Perception demo"
+PYTHONPATH=src python3 scripts/run_perception_demo.py
+PYTHONPATH=src python3 scripts/analyze_building_image.py \
+  --input outputs/perception_demo/synthetic_facade.png \
+  --output-dir outputs/building_analysis
+
+echo "[4/7] Safety fault demo"
+PYTHONPATH=src python3 scripts/safety_fault_demo.py
+
+echo "[5/7] RL evaluation"
+PYTHONPATH=src CUDA_VISIBLE_DEVICES= python3 scripts/evaluate_rl.py
+
+echo "[6/7] SDF validation"
+gz sdf -k simulation/gazebo/facade_world.sdf
+gz sdf -k ros2_ws/src/facade_cleaning_uav/worlds/facade_world.sdf
+
+echo "[7/7] ROS build"
+env -i HOME=/home/mohit USER=mohit PATH=/home/mohit/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin bash -lc \
+  'source /opt/ros/humble/setup.bash; cd /mnt/c/Users/mohit/OneDrive/Documents/Facade_drone_Vision/ros2_ws; colcon build --symlink-install'
+
+echo "verification complete"

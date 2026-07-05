@@ -1,0 +1,7 @@
+safety:
+  min_standoff_m: 1.0
+  target_standoff_m: 1.5
+  max_standoff_m: 2.5
+  wind_abort_mps: 8.0
+  min_reservoir_l: 0.25
+  min_battery_pct: 20.0
