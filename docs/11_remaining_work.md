@@ -12,7 +12,13 @@
 - Path planner now cleans dirty glass only and skips non-cleanable areas.
 - Object identification now records object type, confidence, and risk level.
 - Obstacle-aware route planner now detours around blocked cells with configurable clearance.
-- Object-avoidance demo verifies zero clearance violations.
+- Object-avoidance demo verifies zero clearance violations and skips unsafe
+  dirty targets inside inflated obstacle clearance.
+- Closed-loop mission demo connects perception-grid output to object
+  identification, obstacle-aware route planning, safety-gated velocity commands,
+  and cleaning actuation logs.
+- Closed-loop fault run verifies that an injected gust triggers the independent
+  safety layer.
 - CMP Facade Database downloaded and indexed.
 - CMP labels converted into UAV cleaning classes.
 - CMP balcony/blind boxes converted into a YOLO obstacle dataset.
@@ -29,10 +35,10 @@
 - Replace OpenCV heuristic with learned segmentation output.
 - Add real building photo ingestion workflow.
 - Improve PPO with CNN/map observation and curriculum learning.
-- Connect object-aware route steps to ROS/PX4 waypoint or velocity commands.
-- Connect planner outputs to PX4 offboard velocity commands.
-- Add cleaning actuation model: wiper/water-jet trigger and reservoir depletion.
-- Run Gazebo closed-loop demo: perception -> planner -> safety -> offboard control.
+- Connect the Python closed-loop command log to live ROS/PX4 waypoint or
+  velocity commands.
+- Run Gazebo/PX4 closed-loop demo: perception -> planner -> safety -> offboard
+  control.
 - Add final report/video/demo assets.
 
 ## Immediate Next Step
@@ -71,7 +77,18 @@ Object avoidance outputs:
 - `outputs/object_avoidance_demo/avoidance_route.png`
 - `outputs/object_avoidance_demo/identified_objects.json`
 - `outputs/object_avoidance_demo/route_plan.json`
-- Latest demo: `14` identified objects, `37` route steps, `0` clearance violations.
+- Latest conservative demo: `14` identified objects, `20` route steps, `0`
+  clearance violations.
+
+Closed-loop mission outputs:
+
+- `outputs/closed_loop_mission/closed_loop_zone_map.png`
+- `outputs/closed_loop_mission/identified_objects.json`
+- `outputs/closed_loop_mission/route_plan.json`
+- `outputs/closed_loop_mission/nominal_execution.json`
+- `outputs/closed_loop_mission/fault_execution.json`
+- Latest demo: `2` safe cleaning events, `0` nominal safety overrides, `1`
+  injected-gust safety override, `0` clearance violations.
 
 YOLO obstacle pipeline status:
 

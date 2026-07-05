@@ -67,6 +67,22 @@ Outputs:
 
 The route planner inflates blocked cells by a clearance radius, detours around them, and keeps caution objects identified for later speed/standoff handling.
 
+Run the closed-loop mission demo:
+
+```bash
+PYTHONPATH=src python3 scripts/run_closed_loop_mission_demo.py
+```
+
+Outputs:
+
+- `outputs/closed_loop_mission/closed_loop_zone_map.png`
+- `outputs/closed_loop_mission/identified_objects.json`
+- `outputs/closed_loop_mission/route_plan.json`
+- `outputs/closed_loop_mission/nominal_execution.json`
+- `outputs/closed_loop_mission/fault_execution.json`
+
+This is the current v1 end-to-end proof: fused perception map -> object identification -> clearance-aware route -> safety shield -> offboard velocity command -> cleaning actuation log. The injected gust case must trigger the independent safety layer.
+
 Download the selected facade segmentation dataset:
 
 ```bash
@@ -124,6 +140,14 @@ python -m pip install -e .
 2. M2: Gazebo facade world plus scripted wall following.
 3. M3: OpenCV cleaning-zone map pipeline.
 4. M4: PPO coverage planner that beats lawnmower baseline.
-5. M5: closed-loop ROS 2 pipeline with safety fault injection.
+5. M5: closed-loop Python/ROS 2 pipeline with safety fault injection.
+
+Current docs to show progress:
+
+- `docs/06_project_worklog.md`
+- `docs/08_status_report.md`
+- `docs/12_progress_evaluation.md`
+- `docs/14_object_avoidance_route_handling.md`
+- `docs/16_closed_loop_mission_demo.md`
 
 M1 SolidWorks automation remains documented but is not executable in this sandbox because SolidWorks COM automation needs a Windows desktop SolidWorks install.

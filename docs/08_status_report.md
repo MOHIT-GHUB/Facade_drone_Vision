@@ -19,6 +19,10 @@ Generated on 2026-07-05 IST.
 - CMP facade dataset is prepared for both cleaning segmentation and obstacle detection.
 - SegFormer cleaning inference can produce a cleaning-zone map and path.
 - YOLO11n obstacle detector pipeline trains, saves weights, and runs inference.
+- Object-aware route planner now enforces inflated obstacle clearance.
+- Closed-loop mission demo runs planner steps through safety, velocity command
+  generation, and cleaning actuation logs.
+- Injected gust fault triggers a safety override in the closed-loop demo.
 
 ## Verification results
 
@@ -30,7 +34,7 @@ bash scripts/run_all_verification.sh
 
 Latest checked outputs:
 
-- Core smoke test: passed.
+- Core smoke test: passed, including closed-loop executor checks.
 - Perception demo produced `61` cleanable glass cells, `9` concrete skip cells, `26` frame skip cells, and `58` cleaning waypoints.
 - ROS build: `facade_cleaning_uav` finished successfully.
 - SDF validation: both world files valid.
@@ -42,6 +46,12 @@ Latest checked outputs:
 - SegFormer learned pipeline produced `17` cleaning waypoints on sample `cmp_b0001`.
 - YOLO obstacle dataset: `516` train images, `90` validation images, `1872` balcony boxes, `4425` blind boxes.
 - YOLO11n smoke model: training/inference pipeline verified, but mAP is effectively zero after one fractional CPU epoch.
+- Object-avoidance route demo: `14` identified objects, `20` route steps after
+  conservative clearance skipping, and `0` clearance violations.
+- Closed-loop mission demo:
+  - Nominal run: `20` events, `2` safe cleaning events, `0` safety overrides.
+  - Fault run: injected gust triggered `1` safety override.
+  - Clearance violations: `0`.
 
 ## Honest PPO gate
 
@@ -64,8 +74,10 @@ Use this for a truthful demo:
 2. Show safety fault overrides.
 3. Show Gazebo facade world validation and ROS package build.
 4. Show lawnmower vs greedy comparison.
-5. Explain that PPO training runs but has not passed its baseline gate yet.
-6. Explain that SegFormer/YOLO learned perception is wired, with SegFormer staged and YOLO still requiring serious training.
+5. Show `outputs/closed_loop_mission/summary.json` to prove the planner is now
+   connected to safety, offboard-command shaping, and actuation logging.
+6. Explain that PPO training runs but has not passed its baseline gate yet.
+7. Explain that SegFormer/YOLO learned perception is wired, with SegFormer staged and YOLO still requiring serious training.
 
 ## Next technical move
 

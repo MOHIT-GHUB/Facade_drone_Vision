@@ -18,12 +18,14 @@ def find_grid_route(
     start: GridCell,
     goal: GridCell,
     clearance_cells: int = 1,
+    allow_goal_in_clearance: bool = False,
 ) -> list[GridCell]:
     """Find a grid route that avoids blocked cells plus safety clearance.
 
     Breadth-first search is enough here because grid moves have equal cost and
-    the map is small. The goal cell itself is allowed because cleaning targets
-    are cleanable cells adjacent to, but not inside, obstacles.
+    the map is small. By default the goal must also respect inflated obstacle
+    clearance, which is the conservative choice for a cleaning UAV flying near
+    protrusions. Set allow_goal_in_clearance only for diagnostic experiments.
     """
 
     if not zone_map.in_bounds(*start):
@@ -33,7 +35,10 @@ def find_grid_route(
 
     blocked = zone_map.blocked_cells(clearance_cells=clearance_cells)
     blocked.discard(start)
-    blocked.discard(goal)
+    if allow_goal_in_clearance:
+        blocked.discard(goal)
+    elif goal in blocked:
+        return []
     queue: deque[GridCell] = deque([start])
     previous: dict[GridCell, GridCell | None] = {start: None}
 
@@ -65,6 +70,7 @@ def plan_obstacle_aware_cleaning_route(
     start: GridCell = (0, 0),
     threshold: float = 0.25,
     clearance_cells: int = 1,
+    allow_goal_in_clearance: bool = False,
 ) -> dict[str, object]:
     """Plan a route that identifies targets and detours around obstacles."""
 
@@ -82,6 +88,7 @@ def plan_obstacle_aware_cleaning_route(
                 current,
                 target,
                 clearance_cells=clearance_cells,
+                allow_goal_in_clearance=allow_goal_in_clearance,
             )
             if not route:
                 unreachable.append(target)
@@ -124,12 +131,43 @@ def plan_obstacle_aware_cleaning_route(
     return {
         "policy": "obstacle_aware_bfs_clearance_route",
         "clearance_cells": clearance_cells,
+        "allow_goal_in_clearance": allow_goal_in_clearance,
         "start": {"x": start[0], "z": start[1]},
         "steps": route_steps,
         "skipped_targets": skipped_targets,
         "object_summary": zone_map.object_summary(),
         "zone_summary": zone_map.summary(),
     }
+
+
+def validate_route_clearance(
+    zone_map: CleaningZoneMap,
+    route: dict[str, object],
+    clearance_cells: int | None = None,
+) -> list[dict[str, int | str]]:
+    """Return route steps that enter inflated blocked cells."""
+
+    if clearance_cells is None:
+        clearance_cells = int(route.get("clearance_cells", 0))
+    blocked = zone_map.blocked_cells(clearance_cells=clearance_cells)
+    violations: list[dict[str, int | str]] = []
+    for index, step in enumerate(route.get("steps", [])):
+        if not isinstance(step, dict):
+            continue
+        x = int(step["x"])
+        z = int(step["z"])
+        if (x, z) not in blocked:
+            continue
+        violations.append(
+            {
+                "index": index,
+                "x": x,
+                "z": z,
+                "action": str(step.get("action", "unknown")),
+                "reason": "inside_inflated_obstacle_clearance",
+            }
+        )
+    return violations
 
 
 def plan_greedy_cleaning_path(

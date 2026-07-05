@@ -14,6 +14,7 @@ The project needed more than object boxes on an image. A UAV can only act safely
 - `identify_objects_from_zone_map(...)` converts map state into object records.
 - `apply_yolo_detections_to_zone_map(...)` can project detector boxes into the grid, but current YOLO weights remain diagnostic only.
 - `plan_obstacle_aware_cleaning_route(...)` plans transit and clean actions using a grid route around obstacles.
+- `validate_route_clearance(...)` verifies that no transit or cleaning step enters inflated blocked clearance.
 
 ## Demo Result
 
@@ -29,8 +30,8 @@ Latest result:
 - Object summary:
   - `blind_or_shutter`: `5`
   - `protruding_balcony`: `9`
-- Route steps: `37`
-- Skipped targets: `0`
+- Route steps: `20`
+- Skipped targets: `5`
 - Clearance violations: `0`
 
 Outputs:
@@ -51,7 +52,8 @@ This is now the trusted route-handling layer:
 2. The map stores those objects with risk.
 3. Blocked objects are inflated by configurable clearance.
 4. The planner routes around inflated blocked regions.
-5. Cleaning actions are emitted only at reachable cleanable cells.
+5. Cleaning actions are emitted only at reachable cleanable cells outside the inflated blocked clearance.
+6. Dirty targets inside the inflated blocked clearance are skipped and reported.
 
 YOLO is not trusted yet for object identification. It can feed this interface later after better training or a better dataset.
 

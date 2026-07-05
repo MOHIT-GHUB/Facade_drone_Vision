@@ -107,3 +107,41 @@ Verification:
 Important finding:
 
 - The YOLO smoke model is a pipeline proof only. One fractional CPU epoch produced effectively zero useful mAP, so real obstacle detection still needs longer GPU training and more obstacle classes.
+
+## 2026-07-05 - Closed-loop route, safety, and actuation pass
+
+Why this was needed:
+
+- The master prompt requires an end-to-end loop, not only separate perception,
+  planning, and safety modules.
+- The previous object-avoidance route allowed cleaning targets inside inflated
+  obstacle clearance. That was useful for diagnostics, but too permissive for a
+  serious safety story.
+
+What was implemented:
+
+- `find_grid_route(...)` now treats inflated obstacle clearance as hard blocked
+  for the goal by default.
+- `plan_obstacle_aware_cleaning_route(...)` now skips dirty targets that are
+  unreachable under the requested clearance.
+- `validate_route_clearance(...)` checks every emitted route step.
+- `facade_uav.integration.closed_loop` converts route steps into clamped
+  velocity commands, safety decisions, and water-jet actuation events.
+- `scripts/run_closed_loop_mission_demo.py` produces nominal and fault mission
+  logs.
+- Full verification now includes object avoidance and closed-loop mission checks.
+
+Latest result:
+
+- Object avoidance: `14` identified objects, `20` route steps, `0` clearance
+  violations.
+- Closed-loop nominal run: `20` events, `2` safe cleaning events, `0` safety
+  overrides.
+- Closed-loop fault run: injected gust caused `1` safety override.
+
+Evidence:
+
+- `docs/16_closed_loop_mission_demo.md`
+- `outputs/closed_loop_mission/summary.json`
+- `outputs/closed_loop_mission/nominal_execution.json`
+- `outputs/closed_loop_mission/fault_execution.json`

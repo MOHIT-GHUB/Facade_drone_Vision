@@ -9,7 +9,7 @@ if str(SRC) not in sys.path:
 
 from facade_uav.cleaning_zone_map import CleaningZoneMap
 from facade_uav.perception.object_identification import identify_objects_from_zone_map, write_identified_objects
-from facade_uav.planning.coverage_path import plan_obstacle_aware_cleaning_route
+from facade_uav.planning.coverage_path import plan_obstacle_aware_cleaning_route, validate_route_clearance
 from facade_uav.perception.opencv_cleaning_zone import render_zone_map
 
 
@@ -79,11 +79,7 @@ def main() -> None:
     write_identified_objects(objects, output_dir / "identified_objects.json")
     (output_dir / "route_plan.json").write_text(json.dumps(route, indent=2), encoding="utf-8")
 
-    blocked = zone_map.blocked_cells(clearance_cells=1)
-    violations = [
-        step for step in route["steps"]
-        if isinstance(step, dict) and (int(step["x"]), int(step["z"])) in blocked and step.get("action") != "clean"
-    ]
+    violations = validate_route_clearance(zone_map, route, clearance_cells=1)
     summary = {
         "identified_object_count": len(objects),
         "object_summary": zone_map.object_summary(),

@@ -27,8 +27,9 @@ The project foundation is working. The reliable demo path today is:
 2. Cleaning-zone map generation.
 3. Object identification into clear/caution/blocked cells.
 4. Obstacle-aware route planning with clearance detours.
-5. Safety override checks.
-6. ROS/Gazebo package build and world validation.
+5. Closed-loop safety-gated command generation and cleaning actuation logs.
+6. Safety override checks.
+7. ROS/Gazebo package build and world validation.
 
 The learned perception stack is partially working:
 
@@ -137,7 +138,31 @@ Object-avoidance demo result:
 
 - Identified objects: `14`
 - Object types: `blind_or_shutter`, `protruding_balcony`
-- Route steps: `37`
+- Route steps after conservative clearance skipping: `20`
 - Clearance violations: `0`
 
 The object-aware route planner is now the trusted route-handling layer. YOLO remains diagnostic until a better obstacle perception model is trained.
+
+### Closed-Loop Mission Demo
+
+Status: v1 integration proof passed.
+
+Latest result:
+
+- Pipeline: perception map -> object identification -> route -> safety -> offboard velocity command -> cleaning actuation log.
+- Nominal events: `20`
+- Safe cleaning events: `2`
+- Nominal safety overrides: `0`
+- Fault-run safety overrides: `1`
+- Clearance violations: `0`
+
+Use these files:
+
+- `outputs/closed_loop_mission/closed_loop_zone_map.png`
+- `outputs/closed_loop_mission/summary.json`
+- `outputs/closed_loop_mission/nominal_execution.json`
+- `outputs/closed_loop_mission/fault_execution.json`
+
+This is the strongest current proof that the project is no longer only separate
+modules. The remaining integration jump is to drive PX4 SITL with the same
+commands inside Gazebo.
