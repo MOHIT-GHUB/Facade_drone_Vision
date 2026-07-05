@@ -6,9 +6,11 @@ Use this file when someone asks for proof that the project was uploaded and is t
 
 ## What To Show
 
-- Public/private GitHub repository URL.
-- Latest commit hash.
-- Commit date and branch.
+- GitHub repository URL: https://github.com/MOHIT-GHUB/Facade_drone_Vision
+- Visibility: public
+- Branch: `main`
+- Initial upload commit: `356798a0ab07de3f4c645bdb139e522d53551f0a`
+- GitHub pushed timestamp: `2026-07-05T10:57:02Z`
 - `README.md` project overview.
 - `docs/06_project_worklog.md` for chronological work evidence.
 - `docs/13_training_run_log.md` for YOLO training evidence and honest results.
@@ -53,8 +55,8 @@ verification complete
 ## Suggested Proof Message
 
 ```text
-Repository: <GitHub URL>
+Repository: https://github.com/MOHIT-GHUB/Facade_drone_Vision
 Branch: main
-Commit: <commit hash>
+Commit: 356798a0ab07de3f4c645bdb139e522d53551f0a
 This project includes autonomous facade-cleaning UAV perception, object-aware route planning, safety checks, ROS/Gazebo scaffolding, RL experiments, dataset conversion scripts, and documented training/evaluation logs.
 ```
